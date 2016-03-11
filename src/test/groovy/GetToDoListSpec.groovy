@@ -25,5 +25,55 @@ class GetToDoListSpec extends Specification {
 		then: "the server send the todos as JSON"
 			response.status == 200
 	}
+
+	def "Get ToDo-List without login"() {
+		
+		given: "A RESTClient without login"
+			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def token = ""
+		
+		when: "request all todos per GET Method"
+			response = drtodolittle.get( path: '/api/todos',
+			contentType: JSON,
+			requestContentType: JSON,
+			headers: [authorization: "bearer " + token])
+			
+		then: "the server send an unauthorized status"
+			def e = thrown(groovyx.net.http.HttpResponseException)
+			e.getStatusCode() == 401
+	}
+
+	def "Get ToDo-List with corrupt login token"() {
+		
+		given: "A RESTClient with corrupt login token"
+			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def token = "eyJhbGciOzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwicHJvY2Vzc0lkIjoiMTIzNCIsImZpcnN0bmFtZSI6ImZpcnN0dGVzdCIsImxhc4RuYW1lIjoibGFzdHRlc3QifQ.izoHafVk9lONcigE3SbGNXkveC6Xj2uJkOaZ8TmgtS-a3db5L2usLOoo3wm4s_PUKR_x0rlgEscMHs9V0vwG6A"
+		
+		when: "request all todos per GET Method"
+			response = drtodolittle.get( path: '/api/todos',
+			contentType: JSON,
+			requestContentType: JSON,
+			headers: [authorization: "bearer " + token])
+			
+		then: "the server send an unauthorized status"
+			def e = thrown(groovyx.net.http.HttpResponseException)
+			e.getStatusCode() == 401
+	}
 	
+	def "Get ToDo-List with wrong login token"() {
+		
+		given: "A RESTClient with wrong login token"
+			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwicHJvY2Vzc0lkIjoiMTIzNCIsImZpcnN0bmFtZSI6ImZpcnN0dGVzdCIsImxhc4RuYW1lIjoibGFzdHRlc3QifQ.izoHafVk9lONcigE3SbGNXkveC6Xj2uJkOaZ8TmgtS-a3db5L2usLOoo3wm4s_PUKR_x0rlgEscMHs9V0vwG6A"
+		
+		when: "request all todos per GET Method"
+			response = drtodolittle.get( path: '/api/todos',
+			contentType: JSON,
+			requestContentType: JSON,
+			headers: [authorization: "bearer " + token])
+			
+		then: "the server send an unauthorized status"
+			def e = thrown(groovyx.net.http.HttpResponseException)
+			e.getStatusCode() == 401
+	}
 }
