@@ -99,7 +99,7 @@ class GetToDoListSpec extends Specification {
 		then: "the server send an unsupported media type status"
 			println response.data
 			def e = thrown(groovyx.net.http.HttpResponseException)
-			e.getStatusCode() == 500
+			e.getStatusCode() == 406
 	}
 	
 }
