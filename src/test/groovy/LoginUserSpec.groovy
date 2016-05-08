@@ -4,11 +4,13 @@ import static groovyx.net.http.ContentType.*
 
 class LoginUserSpec extends Specification {
 
+	def serverurl = 'http://app.drtodolittle.de'
+//	def serverurl = 'http://localhost:2000'
 	
 	def "User logon with correct username and password"() {
 		
 		given: "New RESTClient without login token"
-			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def drtodolittle = new RESTClient( serverurl )
 		
 		when: "Send username and password per POST Method"
 			def response = drtodolittle.post( path : '/api/todos/login',
@@ -27,7 +29,7 @@ class LoginUserSpec extends Specification {
 	def "User logon with incorrect username and password"() {
 		
 		given: "New RESTClient without login token"
-			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def drtodolittle = new RESTClient( serverurl )
 		
 		when: "Send username and password per POST Method"
 			def response = drtodolittle.post( path : '/api/todos/login',
@@ -44,7 +46,7 @@ class LoginUserSpec extends Specification {
 	def "User logon with empty username and password"() {
 		
 		given: "New RESTClient without login token"
-			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def drtodolittle = new RESTClient( serverurl )
 		
 		when: "Send username and password per POST Method"
 			def response = drtodolittle.post( path : '/api/todos/login',
@@ -60,7 +62,7 @@ class LoginUserSpec extends Specification {
 	def "User logon with no username and password"() {
 		
 		given: "New RESTClient without login token"
-			def drtodolittle = new RESTClient( 'http://www.drtodolittle.de' )
+			def drtodolittle = new RESTClient( serverurl )
 		
 		when: "Send username and password per POST Method"
 			def response = drtodolittle.post( path : '/api/todos/login',

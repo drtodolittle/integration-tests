@@ -93,11 +93,6 @@
       <version>1.9.2</version>
     </dependency>
     <dependency>
-      <groupId>commons-beanutils</groupId>
-      <artifactId>commons-beanutils</artifactId>
-      <version>1.9.2</version>
-    </dependency>
-    <dependency>
       <groupId>org.codehaus.groovy.modules.http-builder</groupId>
       <artifactId>http-builder</artifactId>
       <version>0.7</version>
