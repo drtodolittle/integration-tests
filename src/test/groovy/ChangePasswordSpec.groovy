@@ -19,7 +19,7 @@ class ChangePasswordSpec extends Specification {
 			def token = response.data.token
 		
 		when: "Send oldpassword and newpassword per PUT Method"
-			response = drtodolittle.put( path : '/api/users',
+			response = drtodolittle.put( path : '/api/user',
 			contentType: JSON,
 			requestContentType:  JSON,
 			body: [oldPassword: "dirk1234", newPassword: "dirk1234new"],
@@ -74,7 +74,7 @@ class ChangePasswordSpec extends Specification {
 			def token = response.data.token
 		
 		when: "Send oldpassword and newpassword per PUT Method"
-			response = drtodolittle.put( path : '/api/users',
+			response = drtodolittle.put( path : '/api/user',
 			contentType: JSON,
 			requestContentType:  JSON,
 			body: [oldPassword: "dirk1234new", newPassword: "dirk1234"],
